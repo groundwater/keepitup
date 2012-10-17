@@ -12,6 +12,7 @@ Usage:
 	  -C, --current <directory>  execute from directory
 	  -u, --uptime <time>        minimum uptime for auto restart (seconds)
 	  -l, --logfile <file>       write to logfile
+	  -d, --env <file>           load environmental variables from file
 
 Example:
 
