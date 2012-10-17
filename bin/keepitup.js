@@ -11,6 +11,7 @@ prog.option('-w, --watch <target>', 'watch target','./');
 prog.option('-C, --current <directory>', 'execute from directory','./');
 prog.option('-u, --uptime <time>', 'minimum uptime for auto restart (seconds)', 1);
 prog.option('-l, --logfile <file>', 'write to logfile');
+prog.option('-d, --env <file>','load environmental variables from file','.env');
 prog.parse(process.argv);
 
 var watch = fs.realpathSync(prog.watch);
@@ -59,14 +60,37 @@ function proc(cmd,args,opts){
 			});
 }
 
+function getenv(file){
+	if(fs.existsSync(file)){
+		console.log("Loading ENV File %s".magenta,file);
+		var env = {};
+		var data = fs.readFileSync(file).toString();
+		
+		data.split(/\n/).forEach(function(item){
+			var items = item.split('=');
+			if(items.length==2){
+				var key = items[0].trim();
+				var val = items[1].trim();
+				env[key] = val;
+				console.log("with: %s=%s",key,val);
+			}
+		});
+		return env;
+	}else{
+		console.log("No ENV File Loaded".magenta);
+		return {};
+	}
+}
+
 function run(){
 	console.log("Watching %s for changes".magenta,watch);
 	console.log("Using cwd %s".magenta,cwd);
 	console.log("Minimum Uptime Before Restart (seconds): %d".magenta,prog.uptime);
 	var log = prog.logfile;
 	var opts = {
-		cwd : cwd,
-		stdio : ['pipe', process.stdout, process.stderr]
+		cwd   : cwd,
+		stdio : ['pipe', process.stdout, process.stderr],
+		env   : getenv(prog.env)
 	}
 	if(log){
 		console.log("Use Log File %s: ".magenta,log);
