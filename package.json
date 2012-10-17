@@ -1,0 +1,25 @@
+{
+  "name": "keepitup",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Keep it Up Baby",
+  "author": "Jacob Groundwater <groundwater@gmail.com>",
+  "homepage": "http://undeflow.ca",
+  "contributors": [],
+  "directories": {
+    "lib": "./lib"
+  },
+  "dependencies": {
+    "commander": "~1.0.5",
+    "nconf": "~0.6.4",
+    "colors": "~0.6.0-1"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=0.8.11"
+  },
+  "bin": {
+    "keepitup": "bin/keepitup.js"
+  },
+  "scripts": {}
+}
