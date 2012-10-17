@@ -9,6 +9,10 @@
     "nconf": "~0.6.4",
     "colors": "~0.6.0-1"
   },
+  "repository" : { 
+    "type" : "git",
+    "url"  : "https://github.com/jacobgroundwater/keepitup.git"
+  },
   "bin": {
     "keepitup": "bin/keepitup.js"
   }
